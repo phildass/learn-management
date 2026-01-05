@@ -7,9 +7,9 @@ export default function ModulePage() {
   const router = useRouter();
   const { id } = router.query;
   
-  const module = id ? getModule(id as string) : null;
+  const moduleData = id ? getModule(id as string) : null;
 
-  if (!module) {
+  if (!moduleData) {
     return (
       <Layout>
         <div className="container-custom py-12">
@@ -35,13 +35,13 @@ export default function ModulePage() {
           </div>
           <div className="flex items-center space-x-3 mb-4">
             <span className="bg-white/20 px-4 py-2 rounded-full text-sm font-semibold">
-              Module {module.moduleNumber}
+              Module {moduleData.moduleNumber}
             </span>
-            <span className="text-primary-100">{module.category}</span>
+            <span className="text-primary-100">{moduleData.category}</span>
           </div>
-          <h1 className="text-4xl font-heading font-bold mb-4">{module.title}</h1>
+          <h1 className="text-4xl font-heading font-bold mb-4">{moduleData.title}</h1>
           <p className="text-xl text-primary-100">
-            {module.description}
+            {moduleData.description}
           </p>
         </div>
       </div>
@@ -51,10 +51,10 @@ export default function ModulePage() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold">Lessons</h2>
-              <span className="text-gray-600">{module.lessons.length} lessons</span>
+              <span className="text-gray-600">{moduleData.lessons.length} lessons</span>
             </div>
             <div className="space-y-4">
-              {module.lessons.map((lesson, index) => (
+              {moduleData.lessons.map((lesson, index) => (
                 <div key={lesson.id} className="card hover:shadow-lg transition-shadow">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -101,7 +101,7 @@ export default function ModulePage() {
             <h3 className="text-lg font-bold mb-2">Module Progress</h3>
             <div className="mb-4">
               <div className="flex justify-between text-sm mb-2">
-                <span>0 of {module.lessons.length} lessons completed</span>
+                <span>0 of {moduleData.lessons.length} lessons completed</span>
                 <span>0%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
@@ -109,7 +109,7 @@ export default function ModulePage() {
               </div>
             </div>
             <p className="text-sm text-gray-700">
-              Complete all {module.lessons.length} lessons and pass the quizzes (3/5 correct answers required) to unlock the next module.
+              Complete all {moduleData.lessons.length} lessons and pass the quizzes (3/5 correct answers required) to unlock the next module.
             </p>
           </div>
         </div>

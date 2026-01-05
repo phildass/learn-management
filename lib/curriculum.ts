@@ -511,6 +511,6 @@ export function getModule(moduleId: string): Module | undefined {
 
 // Helper function to get a specific lesson
 export function getLesson(moduleId: string, lessonId: string): Lesson | undefined {
-  const module = getModule(moduleId);
-  return module?.lessons.find(l => l.id === lessonId);
+  const moduleData = getModule(moduleId);
+  return moduleData?.lessons.find(l => l.id === lessonId);
 }

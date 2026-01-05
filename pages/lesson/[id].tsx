@@ -11,14 +11,14 @@ export default function LessonPage() {
   // Extract module and lesson IDs from the lesson ID (format: lesson-X-Y)
   const moduleId = id ? `module-${(id as string).split('-')[1]}` : '';
   const lesson = id ? getLesson(moduleId, id as string) : null;
-  const module = moduleId ? getModule(moduleId) : null;
+  const moduleData = moduleId ? getModule(moduleId) : null;
 
   const [showQuiz, setShowQuiz] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: number }>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [score, setScore] = useState(0);
 
-  if (!lesson || !module) {
+  if (!lesson || !moduleData) {
     return (
       <Layout>
         <div className="container-custom py-12">
@@ -59,12 +59,12 @@ export default function LessonPage() {
         <div className="container-custom">
           <div className="flex items-center space-x-3 mb-4">
             <Link href={`/module/${moduleId}`} className="text-primary-100 hover:text-white">
-              ← Back to {module.title}
+              ← Back to {moduleData.title}
             </Link>
           </div>
           <div className="flex items-center space-x-3 mb-2">
             <span className="bg-white/20 px-3 py-1 rounded-full text-sm font-semibold">
-              Module {module.moduleNumber} - Lesson {lesson.lessonNumber}
+              Module {moduleData.moduleNumber} - Lesson {lesson.lessonNumber}
             </span>
             <span className="text-primary-100">~{lesson.estimatedTime} min</span>
           </div>
