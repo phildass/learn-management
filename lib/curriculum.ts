@@ -24,6 +24,8 @@ export interface Module {
   lessons: Lesson[];
 }
 
+import { additionalModules } from './curriculumExtended';
+
 export const curriculum: Module[] = [
   {
     id: 'module-1',
@@ -493,5 +495,22 @@ export const curriculum: Module[] = [
         estimatedTime: 15
       }
     ]
-  }
+  },
+  ...additionalModules
 ];
+
+// Helper function to get all modules
+export function getAllModules(): Module[] {
+  return curriculum;
+}
+
+// Helper function to get a specific module
+export function getModule(moduleId: string): Module | undefined {
+  return curriculum.find(m => m.id === moduleId);
+}
+
+// Helper function to get a specific lesson
+export function getLesson(moduleId: string, lessonId: string): Lesson | undefined {
+  const module = getModule(moduleId);
+  return module?.lessons.find(l => l.id === lessonId);
+}
